@@ -3,6 +3,7 @@ let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
+const axios = require('axios').default;
 
 // Check if a user with the given username already exists
 const doesExist = (username) => {
@@ -125,5 +126,38 @@ public_users.get('/review/:isbn',function (req, res) {
     }
 
 });
+
+let baseurl = "https://vitorforrequ-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai"
+
+async function task10() {
+    let url = baseurl;
+    const result = await axios.get(url);
+    console.log("task10:")
+    console.log(result.data);
+}
+
+async function task11(){
+    let isbn = "5";
+    let url = baseurl + "/isbn/" + isbn;
+    const result = await axios.get(url);
+    console.log("task11:")
+    console.log(result.data);
+}
+
+async function task12(){
+    let author = "Unknown";
+    let url = baseurl + "/author/" + author;
+    const result = await axios.get(url);
+    console.log("task12:")
+    console.log(result.data);
+}
+
+async function task13(){
+    let title = "Fairy tales";
+    let url = baseurl + "/title/" + title;
+    const result = await axios.get(url);
+    console.log("task13:")
+    console.log(result.data);
+}
 
 module.exports.general = public_users;
